@@ -52,8 +52,8 @@ class _MarketPageState extends State<MarketPage> {
                     icon: Icon(Icons.shopping_basket), // Icon for my products
                     label: Text('My Products'), // Text for my products button
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue, // Background color of button
-                      onPrimary: Colors.white, // Text color of button
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.blue, // Text color of button
                       padding: EdgeInsets.symmetric(
                         vertical: 15.0, // Adjust vertical padding
                         horizontal: 30.0, // Adjust horizontal padding
@@ -69,8 +69,8 @@ class _MarketPageState extends State<MarketPage> {
                     label:
                         Text('Buy a Product'), // Text for buy a product button
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // Background color of button
-                      onPrimary: Colors.white, // Text color of button
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.green, // Text color of button
                       padding: EdgeInsets.symmetric(
                         vertical: 15.0, // Adjust vertical padding
                         horizontal: 30.0, // Adjust horizontal padding

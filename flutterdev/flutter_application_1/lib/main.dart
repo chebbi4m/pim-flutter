@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/parentRegister.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/user.dart';
 import '../models/user.dart';
@@ -13,7 +14,8 @@ class LoginApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '',
-      home: LoginPage(),
+      // home: LoginPage(),
+      home: ParentRegistrationPage(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -249,7 +251,7 @@ class _LoginFormState extends State<LoginForm> {
             }
           },
           style: ElevatedButton.styleFrom(
-            primary: Color(0xFF38A9C2), // Background color
+            backgroundColor: Color(0xFF38A9C2), // Background color
             fixedSize: Size(72.0, 36.0), // Adjust width and height
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0), // Adjust border radius
