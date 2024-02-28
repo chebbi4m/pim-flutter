@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/paymentProvider.dart';
+import 'package:get/route_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/user.dart';
 import '../models/user.dart';
 import '../pages/parentmarket.dart';
 
 void main() {
-  runApp(LoginApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => PaymentNotifier()),
+  ], child: LoginApp()));
 }
 
 class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: '',
-      home: LoginPage(),
+      home: MyParentMarket(),
       debugShowCheckedModeBanner: false,
     );
   }
