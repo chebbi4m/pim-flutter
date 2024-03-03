@@ -1,4 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/bottomBarWidget.dart';
+import 'package:flutter_application_1/pages/silverappBarwidget.dart';
 import '../services/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'addProductForm.dart';
@@ -17,16 +21,22 @@ class _MarketPageState extends State<MarketPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Market'),
-      ),
-      body: Column(
+        body: NestedScrollView(
+      floatHeaderSlivers: true,
+      headerSliverBuilder: (context, _) => [sliverAppBarWidget()],
+      body: Stack(
         children: <Widget>[
-          SizedBox(height: 20), // Adjust as needed for spacing
-          Center(
+          SizedBox(height: 50),
+          Padding(
+      padding: const EdgeInsets.only(top: 50.0),// Adjust as needed for spacing
+          child :Center(
+            
             child: Visibility(
+              
               visible: _buttonsVisible,
               child: Column(
+                
+     
                 children: [
                   ElevatedButton.icon(
                     onPressed: () async {
@@ -82,18 +92,22 @@ class _MarketPageState extends State<MarketPage> {
                     icon: Icon(Icons.add_shopping_cart),
                     label: Text('Add a Product to Sell'),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.orange,
-                      onPrimary: Colors.white,
+                       backgroundColor: Color(0xFFFFE27D),
+                        textStyle: TextStyle(color: Color(
+                                                                0xFF17233D)),
+                     
                       padding: EdgeInsets.symmetric(
                         vertical: 15.0,
                         horizontal: 30.0,
                       ),
+                      
                     ),
                   ),
                 ],
               ),
             ),
           ),
+          ), 
           SizedBox(height: 20), // Adjust as needed for spacing
           Expanded(
             child: SingleChildScrollView(
@@ -250,11 +264,29 @@ class _MarketPageState extends State<MarketPage> {
               ),
             ),
           ),
+           Align(
+                        alignment: AlignmentDirectional(0, 1),
+                        child: Container(
+                          width: double.infinity,
+                          height: 75,
+                          decoration: BoxDecoration(
+                            color: Color(0x00EEEEEE),
+                          ),
+                   child: BottomBarWidget(),
+                        ),
+                      ),
         ],
+        
       ),
-      floatingActionButton: Visibility(
+     
+    ),
+     floatingActionButton: Visibility(
+      
         visible: !_buttonsVisible,
+        child: Padding(
+      padding: const EdgeInsets.only(bottom: 100.0,right: 25),
         child: FloatingActionButton(
+        
           onPressed: () {
             setState(() {
               _buttonsVisible = true;
@@ -262,9 +294,10 @@ class _MarketPageState extends State<MarketPage> {
             });
           },
           child: Icon(Icons.arrow_back),
-          backgroundColor: Colors.orange,
+          backgroundColor: Color(0xFFFFE27D),
         ),
       ),
+     ),
     );
   }
 }

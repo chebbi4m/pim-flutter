@@ -6,12 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> registerParent(
     String username, String email, String password, String phoneNumber) async {
   try {
-    final url = Uri.parse('http://127.0.0.1:9090/parent/register');
+    final url = Uri.parse('http://10.0.2.2:9090/parent/register');
     final Map<String, String> body = {
-      'Username': username,
-      'Email': email,
-      'Password': password,
-      'PhoneNumber': phoneNumber,
+      'username': username,
+      'email': email,
+      'password': password,
+      'phoneNumber': phoneNumber,
     };
 
     final response = await http.post(
@@ -26,9 +26,9 @@ Future<void> registerParent(
       // Extracting data from the response
       final String encrypted = responseData['encrypted'];
       final String iv = responseData['iv'];
-      final String responseUsername = responseData['parent']['Username'];
-      final String responseEmail = responseData['parent']['Email'];
-      final bool verified = responseData['parent']['Verified'];
+      final String responseUsername = responseData['parent']['username'];
+      final String responseEmail = responseData['parent']['email'];
+      final bool verified = responseData['parent']['verified'];
 
       // Save data to shared preferences
       final SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -8,6 +8,7 @@ import 'pages/parenttoolbar.dart';
 import 'pages/ChildListpage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
+import 'package:flutter_application_1/pages/parentRegister.dart';
 void main() {
   runApp(  
      MultiProvider(
@@ -82,8 +83,11 @@ class LoginPage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        // Navigate to sign up screen
-                        // Placeholder for future implementation
+                       Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ParentRegistrationPage()),
+                        );
                       },
                       child: Text(
                         "Don't have an account?",

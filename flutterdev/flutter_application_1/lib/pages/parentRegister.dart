@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Services/parentServices.dart';
 import 'success.dart';
-
+import '../main.dart';
 class ParentRegistrationPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -73,14 +73,14 @@ class ParentRegistrationPage extends StatelessWidget {
                   ).then((success) {
                     // Show success message
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Registration successful')),
+                      SnackBar(content: Text('Registration successfull , please login with your new informations')),
                     );
 
                     // Navigate to the success page
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => RegistrationSuccessPage()),
+                          builder: (context) => LoginPage()),
                     );
                   }).catchError((error) {
                     // Show error message
