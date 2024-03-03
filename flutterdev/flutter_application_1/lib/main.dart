@@ -1,11 +1,22 @@
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/user.dart';
 import '../models/user.dart';
 import 'pages/parenttoolbar.dart';
-
+import 'pages/ChildListpage.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_1/Providers/Childsprovider.dart';
 void main() {
-  runApp(LoginApp());
+  runApp(  
+     MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ChildProvider()),
+       
+      ],
+      child:  LoginApp(),
+    ),);
 }
 
 class LoginApp extends StatelessWidget {
@@ -219,7 +230,7 @@ class _LoginFormState extends State<LoginForm> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            MyParentMarket()), // Navigate to the new page
+                            ChildListWidget ()), // Navigate to the new page
                   );
 
                   showDialog(
@@ -265,7 +276,7 @@ class _LoginFormState extends State<LoginForm> {
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: Color(0xFF38A9C2), // Background color
+              primary: Color.fromARGB(255, 253, 224, 116), // Background color
               fixedSize: Size(72.0, 36.0), // Adjust width and height
               shape: RoundedRectangleBorder(
                 borderRadius:
@@ -279,8 +290,8 @@ class _LoginFormState extends State<LoginForm> {
                 style: TextStyle(
                   fontFamily: 'Nerko One',
                   fontSize: 18.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
+                  color: Color(0xFF17233D),
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
