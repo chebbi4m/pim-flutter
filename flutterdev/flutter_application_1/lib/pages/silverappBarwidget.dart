@@ -1,21 +1,19 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Providers/Notificationprovider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-class sliverAppBarWidget extends StatefulWidget {
+import 'package:provider/provider.dart';
+
+class sliverAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const sliverAppBarWidget({super.key});
 
   @override
-  State<sliverAppBarWidget> createState() => _sliverAppBarWidgetState();
-}
-
-class _sliverAppBarWidgetState extends State<sliverAppBarWidget>
-{
+  Size get preferredSize => Size.fromHeight(70);
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
-      expandedHeight: 70,
-      pinned: false,
-      floating: true,
-      snap: true,
+    return AppBar(
+      toolbarHeight: 70,
       backgroundColor: Colors.white,
       automaticallyImplyLeading: false,
       shadowColor: const Color(0xFF17233D),
@@ -24,10 +22,10 @@ class _sliverAppBarWidgetState extends State<sliverAppBarWidget>
           color: Color.fromARGB(255, 255, 255, 255),
           boxShadow: [
             BoxShadow(
-              blurRadius: 13,
-              color: Color.fromARGB(26, 0, 0, 0),
-              offset: Offset(10, 10),
-              spreadRadius: 0.5,
+              blurRadius: 10,
+              color: Color.fromARGB(40, 0, 0, 0),
+              offset: Offset(0, 10),
+              spreadRadius: 0,
             )
           ],
           borderRadius: const BorderRadius.only(
@@ -46,7 +44,7 @@ class _sliverAppBarWidgetState extends State<sliverAppBarWidget>
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Outfit',
-                fontSize: 15,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF17233D),
               ),
@@ -56,47 +54,98 @@ class _sliverAppBarWidgetState extends State<sliverAppBarWidget>
       ),
       leading: Padding(
         padding: EdgeInsets.only(top: 15),
-        child: const Icon(
-          Icons.menu,
-          color: Color(0xFF17233D),
-          size: 30,
+        child: ElevatedButton(
+          onPressed: () {
+            Provider.of<NotificationProvider>(context, listen: false)
+                .toggleMenu();
+          },
+          style: ElevatedButton.styleFrom(
+            // Make button transparent
+            // Remove elevation
+
+            padding: EdgeInsets.zero,
+            elevation: 0, // Remove padding
+            // Make button circular
+          ),
+          child: const Icon(
+            Icons.notifications_active_sharp,
+            color: Color(0xFF17233D),
+            size: 30,
+          ),
         ),
       ),
       actions: [
-        Align(
-          alignment: const AlignmentDirectional(0, -1),
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
-                  child: FaIcon(
-                    FontAwesomeIcons.solidMoon,
-                    color: Color(0xFF17233D),
-                    size: 22,
-                  ),
+        Padding(
+          padding: EdgeInsets.only(top: 15),
+          child: Row(children: [
+            Align(
+              alignment: const AlignmentDirectional(0, -1),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                      child: FaIcon(
+                        FontAwesomeIcons.solidMoon,
+                        color: Color(0xFF17233D),
+                        size: 22,
+                      ),
+                    ),
+                    Stack(
+                      children: [
+                        // Profile image with circular container in the background
+                        Container(
+                          width: 45, // Adjust size as needed
+                          height: 45, // Adjust size as needed
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey
+                                .withOpacity(0.3), // Background color
+                          ),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/images/Asset 1-8.png',
+                              fit: BoxFit.cover,
+                              width: 40, // Adjust size as needed
+                              height: 40, // Adjust size as needed
+                            ),
+                          ),
+                        ),
+                        // Icon in the bottom right corner
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 3,
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.all(4),
+                            child: Icon(
+                              Icons.menu,
+                              color: Colors.black,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                Container(
-                  width: 40,
-                  height: 100,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.asset(
-                    'assets/images/Asset 1-8.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+          ]),
         ),
       ],
-      centerTitle: true,
-      elevation: 28,
     );
   }
 }

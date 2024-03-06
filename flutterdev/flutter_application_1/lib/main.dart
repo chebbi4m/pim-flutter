@@ -1,6 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Providers/Notificationprovider.dart';
+import 'package:flutter_application_1/pages/mainskeleton.dart';
+import 'package:flutter_application_1/pages/widget1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/user.dart';
 import '../models/user.dart';
@@ -14,7 +17,8 @@ void main() {
      MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ChildProvider()),
-       
+       ChangeNotifierProvider(create: (context) => NotificationProvider()),
+        ChangeNotifierProvider(create: (_) => BottomNavigationIndexProvider()),
       ],
       child:  LoginApp(),
     ),);
@@ -234,7 +238,7 @@ class _LoginFormState extends State<LoginForm> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            ChildListWidget ()), // Navigate to the new page
+                            Mainskeleton()), // Navigate to the new page
                   );
 
                   showDialog(
@@ -508,3 +512,213 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     );
   }
 }
+/*
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/success.dart';
+import 'package:provider/provider.dart';
+
+void main() {
+   runApp(
+    ChangeNotifierProvider(
+      create: (_) => MyState(),
+      child: MaterialApp(
+        title: 'Sliding Drawer Example',
+        home: MyHomePage(),
+      ),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Sliding Drawer Example',
+      home: MyHomePage(),
+    );
+  }
+}
+class MyState extends ChangeNotifier {
+  late AnimationController _controller;
+
+  MyState() {
+    _controller = AnimationController(
+      vsync: NavigatorState(),
+      duration: Duration(milliseconds: 250),
+    );
+  }
+
+  AnimationController get controller => _controller;
+
+  void toggleController() {
+    if (_controller.isDismissed) {
+      _controller.forward();
+    } else {
+      _controller.reverse();
+    }
+    notifyListeners();
+  }
+}
+class MyHomePage extends StatefulWidget {
+  final Widget child =  RegistrationSuccessPage();
+  final bool isOpen;
+  final Duration animationDuration;
+    MyHomePage({
+    Key? key,
+ 
+    this.isOpen = false,
+    this.animationDuration = const Duration(milliseconds: 250),
+  }) : super(key: key);
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+ 
+class _MyHomePageState extends State<MyHomePage>     
+ with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _slideAnimation;
+   final scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: widget.animationDuration);
+    _slideAnimation = Tween<double>(begin: 0.0, end: 1.0)
+        .animate(_controller)
+          ..addListener(() => setState(() {}));
+    if (widget.isOpen) {
+      _controller.forward();
+    }
+  }
+
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+
+
+
+
+
+  @override
+Widget build(BuildContext context) {
+  // Calculate the horizontal offset based on the animation value
+  double xOffset = _slideAnimation.value * MediaQuery.of(context).size.width / 2;
+
+  return GestureDetector(
+        child: Scaffold(
+      key: scaffoldKey,
+      backgroundColor: Colors.white,
+      body: Stack( 
+    
+    children: [
+        Container(
+          width: MediaQuery.of(context).size.width / 2,
+          color: Color.fromARGB(255, 174, 20, 20),
+           // Optional background color for tap area
+        ),
+      // The content that slides
+      AnimatedContainer(
+        duration: widget.animationDuration,
+        curve: Curves.easeInOut,
+        // Apply translation transformation to slide content horizontally
+        transform: Matrix4.translationValues(xOffset, 0.0, 0.0),
+        child: widget.child,
+        
+      ),
+      // (Optional) Add a GestureDetector for user interaction
+ 
+    
+    ],
+  )));
+}
+}
+*//*
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: CustomBackButtonExample(),
+  ));
+}
+
+class CustomBackButtonExample extends StatefulWidget {
+  @override
+  _CustomBackButtonExampleState createState() =>
+      _CustomBackButtonExampleState();
+}
+
+class _CustomBackButtonExampleState extends State<CustomBackButtonExample> {
+  // Array to store selected indexes
+  List<int> selectedIndexes = [0, 1, 2]; // Example initial selection
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        // Handle back button press
+        if (selectedIndexes.isNotEmpty) {
+          // Remove the last selected index
+          selectedIndexes.removeLast();
+          // Perform navigation
+          // Replace this logic with your own navigation
+          // For example, push to a new screen using Navigator
+          print("iiinnnnnnn");
+          // Prevent default system back button behavior
+          return false;
+        }
+        // If there are no selected indexes left, allow the back navigation
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Custom Back Button Example'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Selected Index: ${selectedIndexes.last}'),
+              ElevatedButton(
+                onPressed: () {
+                  // Example: Add a new selected index and navigate
+                  selectedIndexes.add(selectedIndexes.last + 1);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          SelectedScreen(index: selectedIndexes.last),
+                    ),
+                  );
+                },
+                child: Text('Push New Index'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SelectedScreen extends StatelessWidget {
+  final int index;
+
+  const SelectedScreen({Key? key, required this.index}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Selected Screen'),
+      ),
+      body: Center(
+        child: Text('Selected Index: $index'),
+      ),
+    );
+  }
+}
+*/

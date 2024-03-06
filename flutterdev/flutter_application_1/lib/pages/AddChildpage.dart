@@ -4,10 +4,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_application_1/Providers/Notificationprovider.dart';
 import 'package:flutter_application_1/models/ChildModel.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
+import 'package:flutter_application_1/models/Notificationsmodel.dart';
 import 'package:flutter_application_1/pages/ChildListpage.dart';
 import 'package:flutter_application_1/pages/bottomBarWidget.dart';
+import 'package:flutter_application_1/pages/mainskeleton.dart';
 import 'package:flutter_application_1/pages/silverappBarwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -66,7 +69,7 @@ class _AddChildWidgetState extends State<AddChildWidget>
         body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, _) => [
-           sliverAppBarWidget()
+         
           ],
           body: Builder(
             builder: (context) {
@@ -88,13 +91,13 @@ class _AddChildWidgetState extends State<AddChildWidget>
                               Align(
                                 alignment: AlignmentDirectional(-0.08, -0.65),
                                 child: Container(
-                                  width: screenWidth * 0.8,
+                                  width: screenWidth * 0.9,
                                   height: screenHeight * 0.65,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
                                         Color.fromARGB(255, 253, 224, 116),
-                                        Color.fromARGB(255, 254, 249, 226)
+                                        Color.fromARGB(255, 252, 251, 243)
                                       ],
                                       stops: [0, 1],
                                       begin: AlignmentDirectional(0.34, -1),
@@ -223,7 +226,7 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 0, 20, 12),
                                             child: Container(
-                                              width: screenWidth * 0.60,
+                                              width: screenWidth * 0.67,
                                               height: screenHeight * 0.05,
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(15, 5, 0, 0),
@@ -285,7 +288,7 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 0, 20, 12),
                                             child: SizedBox(
-                                              width: screenWidth * 0.60,
+                                              width: screenWidth * 0.67,
                                               height: screenHeight *
                                                   0.05, // Set the width to 200
                                               child: TextFormField(
@@ -486,7 +489,7 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 0, 20, 12),
                                             child: SizedBox(
-                                              width: screenWidth * 0.60,
+                                              width: screenWidth * 0.67,
                                               height: screenHeight *
                                                   0.05, // Set the width to 200
                                               child: TextFormField(
@@ -577,7 +580,7 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 0, 20, 12),
                                             child: SizedBox(
-                                              width: screenWidth * 0.60,
+                                              width: screenWidth * 0.67,
                                               height: screenHeight *
                                                   0.05, // Set the width to 200
                                               child: TextFormField(
@@ -669,7 +672,7 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 0, 20, 12),
                                             child: SizedBox(
-                                              width: screenWidth * 0.60,
+                                              width: screenWidth * 0.67,
                                               height: screenHeight *
                                                   0.05, // Set the width to 200
                                               child: TextFormField(
@@ -795,17 +798,7 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                   ),
                                 ),
                               ),
-                              Align(
-                                alignment: AlignmentDirectional(0, 0.76),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    color: Color(0x00EEEEEE),
-                                  ),
-                                   child: BottomBarWidget(),
-                                ),
-                              ),
+                             
                               Align(
                                 alignment: AlignmentDirectional(0, 0.5),
                                 child: Padding(
@@ -892,12 +885,19 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                             prohibitedProductTypes: [],
                                           ) // Assuming it's an empty list for now
                                                   );
-                                          Navigator.push(
+                                                   Provider.of<NotificationProvider>(context,
+                                                  listen: false)
+                                              .createNotification(notification( type: "new child added ", content: "you added a new child named ${ _usernameController.text}", senderId: "senderId",timestamp: DateTime.now()),
+                                          // Assuming it's an empty list for now
+                                                  );
+                                         /* Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     ChildListWidget()),
-                                          );
+                                          );*/
+                                            Provider.of<BottomNavigationIndexProvider>(context, listen: false)
+            .onTabTapped(2);
                                         }
                                       },
                                       child: Text(

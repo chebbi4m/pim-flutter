@@ -21,10 +21,7 @@ class _MarketPageState extends State<MarketPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: NestedScrollView(
-      floatHeaderSlivers: true,
-      headerSliverBuilder: (context, _) => [sliverAppBarWidget()],
-      body: Stack(
+        body:  Stack(
         children: <Widget>[
           SizedBox(height: 50),
           Padding(
@@ -264,20 +261,10 @@ class _MarketPageState extends State<MarketPage> {
               ),
             ),
           ),
-           Align(
-                        alignment: AlignmentDirectional(0, 1),
-                        child: Container(
-                          width: double.infinity,
-                          height: 75,
-                          decoration: BoxDecoration(
-                            color: Color(0x00EEEEEE),
-                          ),
-                   child: BottomBarWidget(),
-                        ),
-                      ),
+         
         ],
         
-      ),
+      
      
     ),
      floatingActionButton: Visibility(

@@ -1,163 +1,116 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/ChildListpage.dart';
+import 'package:flutter_application_1/pages/mainskeleton.dart';
 import 'package:flutter_application_1/pages/marketproductsparent.dart';
 import 'package:flutter_application_1/pages/parenttoolbar.dart';
+import 'package:provider/provider.dart';
 
 class BottomBarWidget extends StatefulWidget {
-  
- 
   @override
   State<BottomBarWidget> createState() => _BottomBarWidgetState();
 }
 
-class _BottomBarWidgetState extends State<BottomBarWidget>
-{
+class _BottomBarWidgetState extends State<BottomBarWidget> {
+  int selectedIndex = 2;
 
-
+  List<Map<String, dynamic>> iconData = [
+    {"icon": Icons.home_rounded, "route": ""},
+    {"icon": Icons.task_alt, "route": ""},
+    {"icon": Icons.family_restroom, "route": "ChildListWidget()"},
+    {"icon": Icons.movie_outlined, "route": ""},
+    {"icon": Icons.museum_sharp, "route": "MarketPage()"},
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return         Stack(
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Align(
-                                    alignment: AlignmentDirectional(0, 1),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      elevation: 0,
-                                      
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 55,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFF1FAFD),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 10,
-                                              color: Color(0x1A57636C),
-                                              offset: Offset(0, -10),
-                                              spreadRadius: 0.1,
-                                            )
-                                          ],
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(0),
-                                            bottomRight: Radius.circular(0),
-                                            topLeft: Radius.circular(35),
-                                            topRight: Radius.circular(35),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Opacity(
-                                    opacity: 0.8,
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.home_rounded,
-                                        color: Color(0xFF17233D),
-                                        size: 24,
-                                      ),
-                                      onPressed: () {
-                                        print('homebutton preeeeeeeeessed ...');
-                                      },
-                                    ),
-                                  ),
-                                  Opacity(
-                                    opacity: 0.8,
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.task_alt,
-                                        color: Color(0xFF17233D),
-                                        size: 24,
-                                      ),
-                                      onPressed: () {
-                                        print('taskbutton pressed ...');
-                                      },
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 10),
-                                        child: Container(
-                                          width: 60,
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            border: Border.all(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            color: Color(0xFFFFE27D),
-                                          ),
-                                          child: IconButton(
-                                            icon: Icon(
-                                              Icons.family_restroom,
-                                              color: Color(0xFF17233D),
-                                              size: 30,
-                                            ),
-                                            onPressed: () {
-                                              print('familybutton pressed ...');
-                                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChildListWidget()),
-                                );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Opacity(
-                                    opacity: 0.8,
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.movie_outlined,
-                                        color: Color(0xFF17233D),
-                                        size: 24,
-                                      ),
-                                      onPressed: () {
-                                        print('reelsbutton pressed ...');
-                                      },
-                                    ),
-                                  ),
-                                  Opacity(
-                                    opacity: 0.8,
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.museum_sharp,
-                                        color: Color(0xFF17233D),
-                                        size: 24,
-                                      ),
-                                      onPressed: () {
-                                        print('marketbutton pressed ...');
-                                            Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MarketPage()),
-                                );
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          );
+    return Stack(
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Align(
+              alignment: AlignmentDirectional(0, 1),
+              child: Material(
+                color: Colors.transparent,
+                elevation: 0,
+                child: Container(
+                  width: double.infinity,
+                  height: 65,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 251, 254, 255),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 8,
+                        color: Color.fromARGB(15, 64, 73, 79),
+                        offset: Offset(0, -11),
+                        spreadRadius: 0.3,
+                      )
+                    ],
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+        
+          
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            for (int index = 0; index < iconData.length; index++)
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedIndex = index;
+                      Provider.of<BottomNavigationIndexProvider>(context, listen: false)
+            .onTabTapped(index);
+                  });
+                },
+                child: Container(
+                  width: 55,
+                  height: 60,
+                  
+                    
+                    color: selectedIndex == index
+                        ? Color(0xFFFFE27D)
+                        : Colors.transparent,
+                  
+                  child:
+                   Padding(
+          padding: EdgeInsets.only(top: 15), // Adjust as needed
+          child: Align(
+            alignment: Alignment.center,
+            child:  Icon(
+                    iconData[index]["icon"],
+                    color: Color(0xFF17233D),
+                    size: 25,
+                  ),
+          ),
+                   ),
+                ),
+              ),
+          ],
+        
+         ),
+        Positioned(
+          left: (selectedIndex * 74.0)+19 ,
+          bottom: 0,
+          child: Container(
+            width: 80,
+            height: 4,
+            color: Color.fromARGB(255, 253, 212, 64),
+          ),
+        ),
+      ],
+    );
   }
 }

@@ -10,7 +10,6 @@ class ChildProvider extends ChangeNotifier {
 
   bool? isLoading = null;
   Future<void> createChild(Child child) async {
-    
     try {
       await _childService.createChild(child);
       _children.add(child);
@@ -23,12 +22,11 @@ class ChildProvider extends ChangeNotifier {
 
   Future<void> fetchChildren() async {
     try {
-      
       isLoading = true;
       _children = await _childService.getChildren();
-      
-        isLoading = false;
-       
+
+      isLoading = false;
+      print(_children);
       notifyListeners();
     } catch (e) {
       print('Error fetching children: $e');

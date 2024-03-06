@@ -2,7 +2,9 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Providers/Notificationprovider.dart';
 import 'package:flutter_application_1/pages/bottomBarWidget.dart';
+import 'package:flutter_application_1/pages/mainskeleton.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
 import './silverappBarwidget.dart';
@@ -104,11 +106,14 @@ class _ChildListWidgetState extends State<ChildListWidget>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+     
+        double menuWidth = screenWidth * 0.35;
     return GestureDetector(
         child: Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      
+    //  appBar: sliverAppBarWidget(),
+     backgroundColor: Colors.white,
       body: Consumer<ChildProvider>(builder: (context, childProvider, _) {
        if ((childProvider.isLoading==null) && (childProvider.isLoading!=true) && childProvider.children.isEmpty) {
           // Fetch children if they are not already loading and the list is empty
@@ -124,19 +129,20 @@ class _ChildListWidgetState extends State<ChildListWidget>
           return NestedScrollView(
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, _) => [
-              sliverAppBarWidget()
+             // sliverAppBarWidget()
             ],
-            body: Consumer<ChildProvider>(
-              builder: (context, childProvider, _) {
+            body: Consumer<NotificationProvider>(
+              builder: (context, Notificationprovider, _) {
                 // Use data from ChildProvider to build UI
                 // For example:
                 // Text('${childProvider.childData.username}')
-                return SafeArea(
-                  top: false,
-                  child: Stack(
+                return  Stack(
+                
                     children: [
+                 
+        
                       Align(
-                        alignment: AlignmentDirectional(0, 2.2),
+                        alignment: AlignmentDirectional(0, 1.54),
                         child: Container(
                           width: screenWidth, // Set width to screen width
                           height: screenHeight * 0.5,
@@ -162,8 +168,8 @@ class _ChildListWidgetState extends State<ChildListWidget>
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0, 1),
+                     /* Align(
+                        alignment: AlignmentDirectional(0, 0.77),
                         child: Container(
                           width: double.infinity,
                           height: 75,
@@ -172,7 +178,7 @@ class _ChildListWidgetState extends State<ChildListWidget>
                           ),
                    child: BottomBarWidget(),
                         ),
-                      ),
+                      ),*/
                       Align(
                         alignment: AlignmentDirectional(0, -0.3),
                         child: Container(
@@ -192,7 +198,7 @@ class _ChildListWidgetState extends State<ChildListWidget>
                             items: childProvider.children.map((child) {
                               return Builder(builder: (BuildContext context) {
                                 return Align(
-                                  alignment: AlignmentDirectional(-0.65, -0.65),
+                                  alignment: AlignmentDirectional(-0.65, -0.25),
                                   child: Material(
                                     color: Colors.transparent,
                                     elevation: 0,
@@ -353,7 +359,7 @@ class _ChildListWidgetState extends State<ChildListWidget>
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.03, 0.71),
+                        alignment: AlignmentDirectional(0.03, 0.59),
                         child: Text(
                           'add a new child to the family ',
                           style: TextStyle(
@@ -364,7 +370,7 @@ class _ChildListWidgetState extends State<ChildListWidget>
                         ),
                       ),
                       Align(
-                          alignment: AlignmentDirectional(-0.01, 0.57),
+                          alignment: AlignmentDirectional(-0.01, 0.42),
                           child: Container(
                             width: 60,
                             height: 60,
@@ -374,11 +380,13 @@ class _ChildListWidgetState extends State<ChildListWidget>
                             ),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
+                              /*  Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => AddChildWidget()),
-                                );
+                                );*/
+                                  Provider.of<BottomNavigationIndexProvider>(context, listen: false)
+            .onTabTapped(5);
                               },
                               style: ElevatedButton.styleFrom(
                                 // Make button transparent
@@ -393,15 +401,12 @@ class _ChildListWidgetState extends State<ChildListWidget>
                               ),
                             ),
                           )),
-                    
-                    ],
-                  ),
-                );
+                    ],);
               },
             ),
           );
         }
-        ;
+        
       }),
     ));
   }
