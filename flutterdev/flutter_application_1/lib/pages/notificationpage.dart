@@ -51,13 +51,29 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                         onTap: () {
                           // Handle tap on notification
                         },
-                        child: Text(
+                        child: Row(
+                           mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                              children: [
+                          Icon(        
+                                                  Icons
+                                                      .person_add_alt_1_outlined,
+                                                  color: Color(
+                                                                0xFF17233D),
+                                                  size: 30,
+                                                ),     
+                                                Padding(padding: EdgeInsets.only(top: 15, left: 12),   
+                       child : Text(   
                           notificationProvider.notifs[index].content,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF17233D),
                           ),
+                        ),
+                                            ),
+                                                                ],
                         ),
                       ),
                   ],
