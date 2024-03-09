@@ -117,7 +117,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         description: descriptionController.text,
                         price: double.parse(priceController.text),
                         type: typeController.text,
-                        sellerId: userId,
+                        sellerId: userId, 
+                        
                       );
 
                       // Add product using ProductService

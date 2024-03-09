@@ -15,11 +15,11 @@ class ChildApi {
       'http://10.0.2.2:9090/api/child'; // Replace with your API base URL
 
   Future<void> createChild(Child child2) async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('userId');
-    
+
     child2.parentId = userId!;
-   
+
     final url =
         Uri.parse('$baseUrl/add'); // Replace with your create child endpoint
     final headers = {'Content-Type': 'application/json'};
@@ -37,6 +37,7 @@ class ChildApi {
           value: responsedata["encrypted"],
           aOptions: _getAndroidOptions(),
         );
+       
         await storage.write(
             key: "iv:${child2.username}",
             value: responsedata["iv"],
@@ -54,10 +55,9 @@ class ChildApi {
   }
 
   Future<List<Child>> getChildren() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('userId');
-    
-    
+
     final response =
         await http.get(Uri.parse('$baseUrl/getallchildrenbyparent/$userId'));
     if (response.statusCode == 200) {

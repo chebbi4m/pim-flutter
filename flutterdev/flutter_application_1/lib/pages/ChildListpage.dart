@@ -3,8 +3,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
+import 'package:flutter_application_1/pages/ParentProduct.dart';
 import 'package:flutter_application_1/pages/bottomBarWidget.dart';
 import 'package:flutter_application_1/pages/mainskeleton.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
 import './silverappBarwidget.dart';
@@ -104,71 +106,72 @@ class _ChildListWidgetState extends State<ChildListWidget>
 
   @override
   Widget build(BuildContext context) {
+    final storage = FlutterSecureStorage();
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-     
-        double menuWidth = screenWidth * 0.35;
+
+    double menuWidth = screenWidth * 0.35;
     return GestureDetector(
         child: Scaffold(
       key: scaffoldKey,
-      
-    //  appBar: sliverAppBarWidget(),
-     backgroundColor: Colors.white,
+
+      //  appBar: sliverAppBarWidget(),
+      backgroundColor: Colors.white,
       body: Consumer<ChildProvider>(builder: (context, childProvider, _) {
-       if ((childProvider.isLoading==null) && (childProvider.isLoading!=true) && childProvider.children.isEmpty) {
+        if ((childProvider.isLoading == null) &&
+            (childProvider.isLoading != true) &&
+            childProvider.children.isEmpty) {
           // Fetch children if they are not already loading and the list is empty
           childProvider.fetchChildren();
         }
 
         // Display loading indicator while loading
-        if ((childProvider.isLoading!=null) && (childProvider.isLoading==true)) {
+        if ((childProvider.isLoading != null) &&
+            (childProvider.isLoading == true)) {
           return Center(
             child: CircularProgressIndicator(),
           );
-        }  else {
+        } else {
           return NestedScrollView(
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, _) => [
-             // sliverAppBarWidget()
+              // sliverAppBarWidget()
             ],
             body: Consumer<NotificationProvider>(
               builder: (context, Notificationprovider, _) {
                 // Use data from ChildProvider to build UI
                 // For example:
                 // Text('${childProvider.childData.username}')
-                return  Stack(
-                
-                    children: [
-                 
-        
-                      Align(
-                        alignment: AlignmentDirectional(0, 1.54),
-                        child: Container(
-                          width: screenWidth, // Set width to screen width
-                          height: screenHeight * 0.5,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFFFE27D),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(0),
-                              bottomRight: Radius.circular(0),
-                              topLeft: Radius.circular(300),
-                              topRight: Radius.circular(300),
-                            ),
+                return Stack(
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0, 1.54),
+                      child: Container(
+                        width: screenWidth, // Set width to screen width
+                        height: screenHeight * 0.5,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFFE27D),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
+                            topLeft: Radius.circular(300),
+                            topRight: Radius.circular(300),
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0.03, -0.92),
-                        child: Text(
-                          'Your Childrens',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 35,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0.03, -0.92),
+                      child: Text(
+                        'Your Childrens',
+                        style: TextStyle(
+                          fontFamily: 'Readex Pro',
+                          fontSize: 35,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                     /* Align(
+                    ),
+                    /* Align(
                         alignment: AlignmentDirectional(0, 0.77),
                         child: Container(
                           width: double.infinity,
@@ -179,37 +182,48 @@ class _ChildListWidgetState extends State<ChildListWidget>
                    child: BottomBarWidget(),
                         ),
                       ),*/
-                      Align(
-                        alignment: AlignmentDirectional(0, -0.3),
-                        child: Container(
-                          width: double.infinity,
-                          height: 400,
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              initialPage: 2,
-                              viewportFraction: 0.40,
-                              disableCenter: true,
-                              enlargeCenterPage: true,
-                              enlargeFactor: 0.65,
-                              enableInfiniteScroll: true,
-                              scrollDirection: Axis.horizontal,
-                              autoPlay: false,
-                            ),
-                            items: childProvider.children.map((child) {
-                              return Builder(builder: (BuildContext context) {
-                                return Align(
-                                  alignment: AlignmentDirectional(-0.65, -0.25),
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(0),
-                                        bottomRight: Radius.circular(30),
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(0),
-                                      ),
+                    Align(
+                      alignment: AlignmentDirectional(0, -0.3),
+                      child: Container(
+                        width: double.infinity,
+                        height: 400,
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                            initialPage: 2,
+                            viewportFraction: 0.40,
+                            disableCenter: true,
+                            enlargeCenterPage: true,
+                            enlargeFactor: 0.65,
+                            enableInfiniteScroll: true,
+                            scrollDirection: Axis.horizontal,
+                            autoPlay: false,
+                          ),
+                          items: childProvider.children.map((child) {
+                            return Builder(builder: (BuildContext context) {
+                              return Align(
+                                alignment: AlignmentDirectional(-0.65, -0.25),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(0),
+                                      bottomRight: Radius.circular(30),
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(0),
                                     ),
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: ()  {
+                                      print("in gesture");
+                                      storage.read(
+                                          key: "crypt:${child.username}",aOptions: AndroidOptions(
+        encryptedSharedPreferences: true,
+        // sharedPreferencesName: 'Test2',
+        // preferencesKeyPrefix: 'Test'
+      )).then((value) => print(value));
+                                          
+                                    },
                                     child: Container(
                                       width: 217,
                                       height: 324,
@@ -241,8 +255,38 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.end,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0, 0),
+                                                  child: TextButton(
+                                                    onPressed: () {
+                                                      print('history button');
+                                                      /* Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ParentProduct( 'Child 2' ?? child.id ?? '' )),
+                                );*/
+                                                    },
+                                                    style: TextButton.styleFrom(
+                                                      // Make button transparent
+                                                      // Remove elevation
+
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      // foregroundColor: Colors.transparent,   // Remove padding
+                                                      // Make button circular
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.history_sharp,
+                                                      color: Color(0xFF17233D),
+                                                      size: 26,
+                                                    ).animate(),
+                                                  ),
+                                                ),
                                                 Icon(
                                                   Icons
                                                       .remove_circle_outline_sharp,
@@ -322,26 +366,60 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5, 25, 0, 0),
+                                                  .fromSTEB(8, 25, 0, 0),
                                               child: Row(
-                                                mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceEvenly,
+                                                //  crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
-                                                  Icon(
-                                                    Icons.history_sharp,
-                                                    color: Color(0xFF17233D),
-                                                    size: 45,
-                                                  ).animate(),
                                                   Align(
                                                     alignment:
                                                         AlignmentDirectional(
-                                                            1, 0),
+                                                            0, 0),
                                                     child: Icon(
                                                       Icons.payments_outlined,
                                                       color: Color(0xFF17233D),
-                                                      size: 45,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0, 0),
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                        print(
+                                                            "iddd" + child.id!);
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ChildWishlistPage(
+                                                                      childName:
+                                                                          child
+                                                                              .username,
+                                                                      childID:
+                                                                          child.id ??
+                                                                              '')),
+                                                        );
+                                                      },
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        // Make button transparent
+                                                        // Remove elevation
+
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        // foregroundColor: Colors.transparent,   // Remove padding
+                                                        // Make button circular
+                                                      ),
+                                                      child: Icon(
+                                                        Icons.favorite,
+                                                        color:
+                                                            Color(0xFF17233D),
+                                                        size: 30,
+                                                      ).animate(),
                                                     ),
                                                   ),
                                                 ],
@@ -352,61 +430,64 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                       ),
                                     ),
                                   ),
-                                );
-                              });
-                            }).toList(),
-                          ),
+                                ),
+                              );
+                            });
+                          }).toList(),
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0.03, 0.59),
-                        child: Text(
-                          'add a new child to the family ',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0.03, 0.59),
+                      child: Text(
+                        'add a new child to the family ',
+                        style: TextStyle(
+                          fontFamily: 'Readex Pro',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Align(
-                          alignment: AlignmentDirectional(-0.01, 0.42),
-                          child: Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                            ),
-                            child: ElevatedButton(
-                              onPressed: () {
+                    ),
+                    Align(
+                        alignment: AlignmentDirectional(-0.01, 0.42),
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
                               /*  Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => AddChildWidget()),
                                 );*/
-                                  Provider.of<BottomNavigationIndexProvider>(context, listen: false)
-            .onTabTapped(5);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                // Make button transparent
-                                // Remove elevation
-                                padding: EdgeInsets.zero, // Remove padding
-                                // Make button circular
-                              ),
-                              child: Icon(
-                                Icons.add,
-                                color: Color(0xFF17233D),
-                                size: 50,
-                              ),
+                              Provider.of<BottomNavigationIndexProvider>(
+                                      context,
+                                      listen: false)
+                                  .onTabTapped(5);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              // Make button transparent
+                              // Remove elevation
+                              padding: EdgeInsets.zero, // Remove padding
+                              // Make button circular
                             ),
-                          )),
-                    ],);
+                            child: Icon(
+                              Icons.add,
+                              color: Color(0xFF17233D),
+                              size: 50,
+                            ),
+                          ),
+                        )),
+                  ],
+                );
               },
             ),
           );
         }
-        
       }),
     ));
   }

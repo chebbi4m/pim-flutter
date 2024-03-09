@@ -5,7 +5,7 @@ class Product {
   final String description;
   final double price;
   final String type;
-
+  final String? image;
   Product({
     required this.id,
     required this.sellerId,
@@ -13,16 +13,18 @@ class Product {
     required this.description,
     required this.price,
     required this.type,
+    this.image,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['_id'],
-      sellerId: json['sellerId'],
-      productName: json['productName'],
-      description: json['description'],
-      price: json['price'].toDouble(),
-      type: json['type'],
+      sellerId: json['sellerId'] ?? '',
+      productName: json['productName'] ?? '',
+      description: json['description']?? '',
+      price: json['price'].toDouble() ?? 0,
+      type: json['type']?? '',
+      image: json['image'] ?? '',
     );
   }
 
