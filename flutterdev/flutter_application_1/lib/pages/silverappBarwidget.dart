@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
+import 'package:flutter_application_1/pages/barparent.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -93,10 +94,19 @@ class sliverAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
                         size: 22,
                       ),
                     ),
-                    Stack(
+                   GestureDetector( onTap: () {
+                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                 
+    UpdateProfile(),),
+                                                        );
+                   },
+                    child: Stack(
                       children: [
                         // Profile image with circular container in the background
-                        Container(
+                       Container(
                           width: 45, // Adjust size as needed
                           height: 45, // Adjust size as needed
                           decoration: BoxDecoration(
@@ -137,8 +147,10 @@ class sliverAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
                             ),
                           ),
                         ),
+                     
                       ],
                     ),
+                     ),
                   ],
                 ),
               ),

@@ -15,7 +15,7 @@ class _MyParentMarketState extends State<MyParentMarket> {
     MarketPage(),
     ReelsPage(),
     WalletPage(),
-    ProfilePage(),
+    UpdateProfile(),
   ];
 
   @override

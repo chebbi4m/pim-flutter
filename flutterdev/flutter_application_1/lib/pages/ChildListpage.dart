@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
 import 'package:flutter_application_1/pages/ParentProduct.dart';
+import 'package:flutter_application_1/pages/barparent.dart';
 import 'package:flutter_application_1/pages/bottomBarWidget.dart';
 import 'package:flutter_application_1/pages/mainskeleton.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -377,10 +378,30 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                                     alignment:
                                                         AlignmentDirectional(
                                                             0, 0),
-                                                    child: Icon(
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                         Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  WalletPage(),
+    ),
+                                                        );
+                                                      } , style:
+                                                          TextButton.styleFrom(
+                                                        // Make button transparent
+                                                        // Remove elevation
+
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        // foregroundColor: Colors.transparent,   // Remove padding
+                                                        // Make button circular
+                                                      ),
+                                                      child: Icon(
                                                       Icons.payments_outlined,
                                                       color: Color(0xFF17233D),
                                                       size: 30,
+                                                    ),
                                                     ),
                                                   ),
                                                   Align(

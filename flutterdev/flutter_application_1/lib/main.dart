@@ -2,10 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
+import 'package:flutter_application_1/controller/paymentProvider.dart';
+import 'package:flutter_application_1/controller/updateProfileProvider.dart';
 import 'package:flutter_application_1/pages/WishProducts.dart';
 import 'package:flutter_application_1/pages/mainskeleton.dart';
 import 'package:flutter_application_1/pages/widget1.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../services/user.dart';
 import '../models/user.dart';
 import 'pages/parenttoolbar.dart';
@@ -14,21 +18,36 @@ import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
 import 'package:flutter_application_1/pages/parentRegister.dart';
 void main() {
+
   runApp(  
      MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ChildProvider()),
        ChangeNotifierProvider(create: (context) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavigationIndexProvider()),
+              ChangeNotifierProvider(create: (context) => PaymentNotifier()),
+      ChangeNotifierProvider(create: (context) => UpdateProfileNotifier()),
       ],
       child:  LoginApp(),
     ),);
+
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Your App Title',
+      home: LoginApp()// Replace with your desired URL
+    );
+  }
+
 }
 
 class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: '',
       home: LoginPage(),
       debugShowCheckedModeBanner: false,
