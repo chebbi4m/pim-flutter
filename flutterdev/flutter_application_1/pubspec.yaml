@@ -43,6 +43,16 @@ dependencies:
   provider: ^6.1.1
   webview_flutter: ^4.5.0
   webview_flutter_android: ^3.15.0
+  image_picker: ^1.0.7
+  firebase_storage: ^11.6.7
+  flutter_screenutil: ^5.9.0
+  hexcolor: ^3.0.1
+  uuid: ^4.3.3
+  image_cropper: ^5.0.1
+  flutter_zoom_drawer: ^3.2.0
+  flutter_svg: ^2.0.10+1
+  flutter_vector_icons: ^2.0.0
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:

@@ -14,6 +14,20 @@ class AuthService {
 
       if (response.statusCode == 200) {
         var userData = jsonDecode(response.body);
+        // Password reset email sent successfully
+        final jsonResponse = json.decode(response.body);
+        final username = jsonResponse['Username'];
+        final email = jsonResponse['Email'];
+        final number = jsonResponse['PhoneNumber'];
+
+        print(username);
+        // Store the reset code in shared preferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('username', username);
+        prefs.setString('Email', email);
+        prefs.setInt('number', number);
+
+        print('Reset code: $username');
         return User.fromJson(userData);
       } else {
         throw Exception('Failed to sign in: ${response.statusCode}');
@@ -44,7 +58,6 @@ class AuthService {
         prefs.setString('resetCode', resetCode);
         prefs.setString('email', email);
         print('Reset code: $resetCode');
-        
 
         return 'Password reset email sent successfully';
       } else if (response.statusCode == 404) {

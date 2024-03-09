@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/paymentProvider.dart';
+import 'package:flutter_application_1/controller/updateProfileProvider.dart';
+import 'package:flutter_application_1/pages/web_view_widget.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../services/user.dart';
 import '../models/user.dart';
 import '../pages/parentmarket.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => PaymentNotifier()),
-  ], child: LoginApp()));
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => PaymentNotifier()),
+      ChangeNotifierProvider(create: (context) => UpdateProfileNotifier()),
+    ],
+    child: LoginApp(),
+  ));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Your App Title',
+      home: WebViewPage(
+          url: 'https://example.com'), // Replace with your desired URL
+    );
+  }
 }
 
 class LoginApp extends StatelessWidget {
@@ -18,7 +36,7 @@ class LoginApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: '',
-      home: MyParentMarket(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
