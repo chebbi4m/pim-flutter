@@ -4,13 +4,16 @@ import 'package:flutter_application_1/models/request/payment_req.dart';
 import 'package:flutter_application_1/models/response/payment_res.dart';
 import 'package:flutter_application_1/services/config.dart';
 import 'package:http/http.dart' as https;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentHelper {
   static var client = https.Client();
 
   static Future<PaymentResModel> makePayment(int amount) async {
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('userId');
     // Create a PaymentReqModel object with the provided amount
-    var paymentReq = PaymentReqModel(amount: amount);
+    var paymentReq = PaymentReqModel(amount: amount,userId: userId!);
 
     // Serialize the PaymentReqModel to JSON
     var requestBody = paymentReqModelToJson(paymentReq);

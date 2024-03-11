@@ -427,6 +427,35 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             ),
                           ),
                         ),
+                        Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(40, 20, 40, 10),
+                      child :  Container(
+                          decoration:
+                              ThemeHelper().buttonBoxDecoration(context),
+                          child: ElevatedButton(
+                            style: ThemeHelper().buttonStyle(),
+                            onPressed: () async {
+                               Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  WalletPage(),
+    ),
+                                                        );
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                              child: Icon(
+                                                      Icons.payments_outlined,
+                                                      color: Colors.white,
+                                                      size: 30,
+                                                    ),
+                            ),
+                          ),
+                        ),
+                        ),
                       ],
                     ),
                   ),

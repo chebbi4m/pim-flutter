@@ -8,17 +8,20 @@ String paymentReqModelToJson(PaymentReqModel data) =>
 
 class PaymentReqModel {
   final int amount;
-
+  final String userId;
   PaymentReqModel({
     required this.amount,
+    required this.userId,
   });
 
   factory PaymentReqModel.fromJson(Map<String, dynamic> json) =>
       PaymentReqModel(
         amount: json["amount"],
+        userId: json["userid"],
       );
 
   Map<String, dynamic> toJson() => {
         "amount": amount,
+"userid": userId,
       };
 }

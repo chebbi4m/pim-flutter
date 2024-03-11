@@ -37,8 +37,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 168, 144, 55).withOpacity(0.4),
-                    Color.fromARGB(255, 210, 168, 14).withOpacity(0.4),
+                    Color.fromARGB(255, 255, 212, 125).withOpacity(0.4),
+                    Color.fromARGB(255, 255, 162, 0).withOpacity(0.7),
                   ],
                   begin: const FractionalOffset(0.0, 0.0),
                   end: const FractionalOffset(1.0, 0.0),
@@ -58,8 +58,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 255, 227, 125).withOpacity(0.4),
-                    Color.fromARGB(255, 255, 227, 125).withOpacity(0.4),
+                    Color.fromARGB(255, 255, 225, 117).withOpacity(1),
+                    Color.fromARGB(255, 255, 212, 125).withOpacity(0.4),
                   ],
                   begin: const FractionalOffset(0.0, 0.0),
                   end: const FractionalOffset(1.0, 0.0),
@@ -79,12 +79,15 @@ class _HeaderWidgetState extends State<HeaderWidget> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 255, 227, 125),
-                    Color.fromARGB(255, 246, 196, 12)
+                //   Color.fromARGB(255, 255, 227, 125),
+                 //  Color.fromARGB(255, 246, 196, 12),
+                    Color.fromARGB(255, 11, 45, 84),
+                   Color.fromARGB(255, 254, 210, 143),
+                    
                   ],
                   begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(1.0, 0.0),
-                  stops: const [0.0, 1.0],
+                  end: const FractionalOffset(0.95, 0.0),
+                  stops: const [0, 0.9],
                   tileMode: TileMode.clamp),
             ),
           ),

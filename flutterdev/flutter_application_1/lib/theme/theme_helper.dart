@@ -44,8 +44,8 @@ class ThemeHelper {
 
   BoxDecoration buttonBoxDecoration(BuildContext context,
       [String color1 = "", String color2 = ""]) {
-    Color c1 = Color.fromARGB(255, 255, 236, 166);
-    Color c2 = Color.fromARGB(255, 255, 200, 0);
+    Color c1 = Color.fromARGB(255, 29, 102, 185);
+    Color c2 = Color.fromARGB(255, 11, 45, 84);
     if (color1.isEmpty == false) {
       c1 = HexColor(color1);
     }
