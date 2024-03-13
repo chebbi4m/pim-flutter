@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wishlist/pages/TaskDetailsPage.dart';
 import './pages/WishProducts.dart';
 import './pages/ParentProduct.dart';
+import './pages/ChildTasks.dart';
 
 void main() {
-  runApp(WishProducts());
+  runApp(ParentTask());
 }
 
 class MyApp extends StatelessWidget {
