@@ -194,6 +194,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
       backgroundColor: Colors.white,
       body: Consumer<UpdateProfileNotifier>(
         builder: (context, updateProfileNotifier, child) {
+          if (updateProfileNotifier.solde.isEmpty) {
+            updateProfileNotifier.getsolde(fullNameController.text);
+          }
           return SingleChildScrollView(
             child: Stack(
               children: [
@@ -428,33 +431,43 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           ),
                         ),
                         Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(40, 20, 40, 10),
-                      child :  Container(
-                          decoration:
-                              ThemeHelper().buttonBoxDecoration(context),
-                          child: ElevatedButton(
-                            style: ThemeHelper().buttonStyle(),
-                            onPressed: () async {
-                               Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  WalletPage(),
-    ),
-                                                        );
-                            },
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                              child: Icon(
-                                                      Icons.payments_outlined,
-                                                      color: Colors.white,
-                                                      size: 30,
-                                                    ),
+                          padding: const EdgeInsets.fromLTRB(40, 20, 40, 10),
+                          child: Text(
+                            'Your balance:${updateProfileNotifier.solde} SPT',
+                            style: TextStyle(
+                              fontFamily: 'Readex Pro',
+                              fontSize: 20,
+                              color: Color(0xFF17233D),
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(40, 20, 40, 10),
+                          child: Container(
+                            decoration:
+                                ThemeHelper().buttonBoxDecoration(context),
+                            child: ElevatedButton(
+                              style: ThemeHelper().buttonStyle(),
+                              onPressed: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => WalletPage(),
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                                child: Icon(
+                                  Icons.payments_outlined,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

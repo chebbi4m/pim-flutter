@@ -6,6 +6,7 @@ import 'package:flutter_application_1/controller/paymentProvider.dart';
 import 'package:flutter_application_1/controller/updateProfileProvider.dart';
 import 'package:flutter_application_1/pages/WishProducts.dart';
 import 'package:flutter_application_1/pages/mainskeleton.dart';
+import 'package:flutter_application_1/pages/mainskeletonchild.dart';
 import 'package:flutter_application_1/pages/widget1.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,31 +18,31 @@ import 'pages/ChildListpage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
 import 'package:flutter_application_1/pages/parentRegister.dart';
-void main() {
 
-  runApp(  
-     MultiProvider(
+void main() {
+  runApp(
+    MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ChildProvider()),
-       ChangeNotifierProvider(create: (context) => NotificationProvider()),
+        ChangeNotifierProvider(create: (context) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavigationIndexProvider()),
-              ChangeNotifierProvider(create: (context) => PaymentNotifier()),
-      ChangeNotifierProvider(create: (context) => UpdateProfileNotifier()),
+                ChangeNotifierProvider(create: (_) => BottomNavigationIndexProvider2()),
+        ChangeNotifierProvider(create: (context) => PaymentNotifier()),
+        ChangeNotifierProvider(create: (context) => UpdateProfileNotifier()),
       ],
-      child:  LoginApp(),
-    ),);
-
+      child: LoginApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your App Title',
-      home: LoginApp()// Replace with your desired URL
-    );
+        title: 'Your App Title',
+        home: LoginApp() // Replace with your desired URL
+        );
   }
-
 }
 
 class LoginApp extends StatelessWidget {
@@ -107,7 +108,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                       Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ParentRegistrationPage()),
@@ -251,34 +252,62 @@ class _LoginFormState extends State<LoginForm> {
                     );
                     return; // Stop further execution
                   }
+                  if (user.role == "parent") {
+                    // Store user data in shared preferences
+                    await storeUserDataInSharedPreferences(user);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Mainskeleton()), // Navigate to the new page
+                    );
 
-                  // Store user data in shared preferences
-                  await storeUserDataInSharedPreferences(user);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Mainskeleton()), // Navigate to the new page
-                  );
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Login Successful'),
+                          content: Text('Welcome, ${user.username}!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pop(user.username); // Return username
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else if (user.role == "child") {
+                      await storeUserDataInSharedPreferences(user);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Mainskeletonchild()), // Navigate to the new page
+                    );
 
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Login Successful'),
-                        content: Text('Welcome, ${user.username}!'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pop(user.username); // Return username
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Login Successful'),
+                          content: Text('Welcome, ${user.username}!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pop(user.username); // Return username
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 } catch (error) {
                   // Handle login error
                   print('Login error: $error');
@@ -333,7 +362,7 @@ class _LoginFormState extends State<LoginForm> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('userId', user.id);
     await prefs.setString('username', user.username);
-    await prefs.setString('email', user.email);
+    await prefs.setString('email', user.email?? '');
   }
 }
 

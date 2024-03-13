@@ -10,6 +10,7 @@ import 'package:flutter_application_1/Providers/Childsprovider.dart';
 import 'package:flutter_application_1/models/Notificationsmodel.dart';
 import 'package:flutter_application_1/pages/ChildListpage.dart';
 import 'package:flutter_application_1/pages/bottomBarWidget.dart';
+import 'package:flutter_application_1/pages/header_widget.dart';
 import 'package:flutter_application_1/pages/mainskeleton.dart';
 import 'package:flutter_application_1/pages/silverappBarwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -61,7 +62,8 @@ class _AddChildWidgetState extends State<AddChildWidget>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+double width = MediaQuery.of(context).size.width;
+       final double _height = 150;
     return GestureDetector(
       child: Scaffold(
         key: scaffoldKey,
@@ -78,6 +80,80 @@ class _AddChildWidgetState extends State<AddChildWidget>
                 child: SingleChildScrollView(
                   child: Stack(
                     children: [
+                      SizedBox(
+                  height: 150,
+                  child: Stack(
+                  children:[
+                  
+        ClipPath(
+          clipper: ShapeClipper([
+            Offset(width / 5, _height),
+            Offset(width / 10 * 5, _height - 60),
+            Offset(width / 5 * 4, _height + 20),
+            Offset(width, _height - 18)
+          ]),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 255, 212, 125).withOpacity(0.4),
+                    Color.fromARGB(255, 255, 162, 0).withOpacity(0.7),
+                  ],
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(1.0, 0.0),
+                  stops: const [0.0, 1.0],
+                  tileMode: TileMode.clamp),
+            ),
+          ),
+        ),
+        ClipPath(
+          clipper: ShapeClipper([
+            Offset(width / 3, _height + 20),
+            Offset(width / 10 * 8, _height - 60),
+            Offset(width / 5 * 4, _height - 60),
+            Offset(width, _height - 20)
+          ]),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 255, 225, 117).withOpacity(1),
+                    Color.fromARGB(255, 255, 212, 125).withOpacity(0.4),
+                  ],
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(1.0, 0.0),
+                  stops: const [0.0, 1.0],
+                  tileMode: TileMode.clamp),
+            ),
+          ),
+        ),
+        ClipPath(
+          clipper: ShapeClipper([
+            Offset(width / 5, _height),
+            Offset(width / 2, _height - 40),
+            Offset(width / 5 * 4, _height - 80),
+            Offset(width, _height - 20)
+          ]),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [
+                //   Color.fromARGB(255, 255, 227, 125),
+                 //  Color.fromARGB(255, 246, 196, 12),
+                    Color.fromARGB(255, 11, 45, 84),
+                   Color.fromARGB(255, 254, 210, 143),
+                    
+                  ],
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(0.95, 0.0),
+                  stops: const [0, 0.9],
+                  tileMode: TileMode.clamp),
+            ),
+          ),
+        ),
+                  ]
+                  )
+                  ),
                       Align(
                         alignment: AlignmentDirectional(0, 1),
                         child: Container(
@@ -96,8 +172,8 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
-                                        Color.fromARGB(255, 253, 224, 116),
-                                        Color.fromARGB(255, 252, 251, 243)
+                                        Color.fromARGB(255, 253, 224, 116).withOpacity(0),
+                                        Color.fromARGB(255, 252, 251, 243).withOpacity(0)
                                       ],
                                       stops: [0, 1],
                                       begin: AlignmentDirectional(0.34, -1),
@@ -202,17 +278,17 @@ class _AddChildWidgetState extends State<AddChildWidget>
                                         ),
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(-0.25, -1),
+                                              AlignmentDirectional(-0.25, -1.05),
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    24, 0, 20, 0),
+                                                    20, 0, 0, 0),
                                             child: Text(
                                               'Select an Icon For your Child',
                                               style: TextStyle(
                                                 fontFamily: 'Outfit',
-                                                color: Color(0xFF17233D),
-                                                fontSize: 20,
+                                                color: Color.fromARGB(255, 241, 246, 255),
+                                                fontSize: 22,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),

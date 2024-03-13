@@ -3,9 +3,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
+import 'package:flutter_application_1/controller/paymentProvider.dart';
 import 'package:flutter_application_1/pages/ParentProduct.dart';
 import 'package:flutter_application_1/pages/barparent.dart';
 import 'package:flutter_application_1/pages/bottomBarWidget.dart';
+import 'package:flutter_application_1/pages/header_widget.dart';
 import 'package:flutter_application_1/pages/mainskeleton.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
@@ -107,10 +109,12 @@ class _ChildListWidgetState extends State<ChildListWidget>
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _amountcontroller = TextEditingController();
     final storage = FlutterSecureStorage();
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+    double width = MediaQuery.of(context).size.width;
+    final double _height = 150;
     double menuWidth = screenWidth * 0.35;
     return GestureDetector(
         child: Scaffold(
@@ -145,6 +149,79 @@ class _ChildListWidgetState extends State<ChildListWidget>
                 // Text('${childProvider.childData.username}')
                 return Stack(
                   children: [
+                    SizedBox(
+                        height: 150,
+                        child: Stack(children: [
+                          ClipPath(
+                            clipper: ShapeClipper([
+                              Offset(width / 5, _height),
+                              Offset(width / 10 * 5, _height - 60),
+                              Offset(width / 5 * 4, _height + 20),
+                              Offset(width, _height - 18)
+                            ]),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Color.fromARGB(255, 255, 212, 125)
+                                          .withOpacity(0.4),
+                                      Color.fromARGB(255, 255, 162, 0)
+                                          .withOpacity(0.7),
+                                    ],
+                                    begin: const FractionalOffset(0.0, 0.0),
+                                    end: const FractionalOffset(1.0, 0.0),
+                                    stops: const [0.0, 1.0],
+                                    tileMode: TileMode.clamp),
+                              ),
+                            ),
+                          ),
+                          ClipPath(
+                            clipper: ShapeClipper([
+                              Offset(width / 3, _height + 20),
+                              Offset(width / 10 * 8, _height - 60),
+                              Offset(width / 5 * 4, _height - 60),
+                              Offset(width, _height - 20)
+                            ]),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Color.fromARGB(255, 255, 225, 117)
+                                          .withOpacity(1),
+                                      Color.fromARGB(255, 255, 212, 125)
+                                          .withOpacity(0.4),
+                                    ],
+                                    begin: const FractionalOffset(0.0, 0.0),
+                                    end: const FractionalOffset(1.0, 0.0),
+                                    stops: const [0.0, 1.0],
+                                    tileMode: TileMode.clamp),
+                              ),
+                            ),
+                          ),
+                          ClipPath(
+                            clipper: ShapeClipper([
+                              Offset(width / 5, _height),
+                              Offset(width / 2, _height - 40),
+                              Offset(width / 5 * 4, _height - 80),
+                              Offset(width, _height - 20)
+                            ]),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [
+                                      //   Color.fromARGB(255, 255, 227, 125),
+                                      //  Color.fromARGB(255, 246, 196, 12),
+                                      Color.fromARGB(255, 11, 45, 84),
+                                      Color.fromARGB(255, 254, 210, 143),
+                                    ],
+                                    begin: const FractionalOffset(0.0, 0.0),
+                                    end: const FractionalOffset(0.95, 0.0),
+                                    stops: const [0, 0.9],
+                                    tileMode: TileMode.clamp),
+                              ),
+                            ),
+                          ),
+                        ])),
                     Align(
                       alignment: AlignmentDirectional(0, 1.54),
                       child: Container(
@@ -168,6 +245,7 @@ class _ChildListWidgetState extends State<ChildListWidget>
                         style: TextStyle(
                           fontFamily: 'Readex Pro',
                           fontSize: 35,
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -215,15 +293,18 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                     ),
                                   ),
                                   child: GestureDetector(
-                                    onTap: ()  {
+                                    onTap: () {
                                       print("in gesture");
-                                      storage.read(
-                                          key: "crypt:${child.username}",aOptions: AndroidOptions(
-        encryptedSharedPreferences: true,
-        // sharedPreferencesName: 'Test2',
-        // preferencesKeyPrefix: 'Test'
-      )).then((value) => print(value));
-                                          
+                                      storage
+                                          .read(
+                                              key: "crypt:${child.username}",
+                                              aOptions: AndroidOptions(
+                                                encryptedSharedPreferences:
+                                                    true,
+                                                // sharedPreferencesName: 'Test2',
+                                                // preferencesKeyPrefix: 'Test'
+                                              ))
+                                          .then((value) => print(value));
                                     },
                                     child: Container(
                                       width: 217,
@@ -367,7 +448,42 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 25, 0, 0),
+                                                  .fromSTEB(0, 5, 0, 0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Expanded(
+                                                    child: Align(
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0, 0),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5, 0, 5, 0),
+                                                        child: Text(
+                                                          "balance : ${childProvider.soldes[child.username]} SPT" ??
+                                                              '0 SPT',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'Readex Pro',
+                                                            color: Color(
+                                                                0xFF17233D),
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(8, 10, 0, 0),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -380,14 +496,70 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                                             0, 0),
                                                     child: TextButton(
                                                       onPressed: () {
-                                                         Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  WalletPage(),
-    ),
+                                                        print("iheb");
+                                                        /* final paymentNotifier =
+                                                            Provider.of<
+                                                                    PaymentNotifier>(
+                                                                context,
+                                                                listen: false);
+                                                        paymentNotifier
+                                                            .transfertochild(15,
+                                                                child.username);*/
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              AlertDialog(
+                                                            title: Text(
+                                                                'recharge your childs account '),
+                                                            content: TextField(
+                                                              controller:
+                                                                  _amountcontroller,
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .number,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                hintText:
+                                                                    'Enter an amount',
+                                                              ),
+                                                            ),
+                                                            actions: [
+                                                              ElevatedButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                  int? number =
+                                                                      int.tryParse(
+                                                                          _amountcontroller
+                                                                              .text);
+                                                                  if (number !=
+                                                                      null) {
+                                                                    // Call your function here with the entered number
+                                                                    final paymentNotifier = Provider.of<
+                                                                            PaymentNotifier>(
+                                                                        context,
+                                                                        listen:
+                                                                            false);
+                                                                    paymentNotifier.transfertochild(
+                                                                        number,
+                                                                        child
+                                                                            .username);
+                                                                    childProvider
+                                                                        .getsolde();
+                                                                  } else {
+                                                                    print(
+                                                                        'Invalid input');
+                                                                  }
+                                                                },
+                                                                child: Text(
+                                                                    'Submit'),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         );
-                                                      } , style:
+                                                      },
+                                                      style:
                                                           TextButton.styleFrom(
                                                         // Make button transparent
                                                         // Remove elevation
@@ -398,10 +570,11 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                                         // Make button circular
                                                       ),
                                                       child: Icon(
-                                                      Icons.payments_outlined,
-                                                      color: Color(0xFF17233D),
-                                                      size: 30,
-                                                    ),
+                                                        Icons.payments_outlined,
+                                                        color:
+                                                            Color(0xFF17233D),
+                                                        size: 30,
+                                                      ),
                                                     ),
                                                   ),
                                                   Align(

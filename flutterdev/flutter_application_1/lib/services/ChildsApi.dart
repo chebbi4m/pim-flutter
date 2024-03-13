@@ -37,7 +37,7 @@ class ChildApi {
           value: responsedata["encrypted"],
           aOptions: _getAndroidOptions(),
         );
-       
+
         await storage.write(
             key: "iv:${child2.username}",
             value: responsedata["iv"],
@@ -52,6 +52,30 @@ class ChildApi {
     } catch (error) {
       print('Error creating child: $error');
     }
+  }
+
+  Future<String> getsolde(String username) async {
+    final url = Uri.parse(
+        'http://10.0.2.2:9090/api/user/solde/${username}'); // Replace with your create child endpoint
+    final headers = {'Content-Type': 'application/json'};
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final responsedata = jsonDecode(response.body);
+
+// Write value
+
+        print('your solde is:${responsedata}');
+        return responsedata.toString();
+      } else {
+        print('Failed to create child: ${response.body}');
+      }
+    } catch (error) {
+      print('Error creating child: $error');
+    }
+    return '';
   }
 
   Future<List<Child>> getChildren() async {
