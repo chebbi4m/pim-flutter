@@ -19,15 +19,15 @@ class ProductService {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('No Products Found'),
-            content: Text(
+            title: const Text('No Products Found'),
+            content: const Text(
                 'No products found. Please add a product for sale before using this feature.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );

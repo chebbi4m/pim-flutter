@@ -21,7 +21,7 @@ class sliverAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
       flexibleSpace: Container(
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 255, 255, 255),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               blurRadius: 10,
               color: Color.fromARGB(40, 0, 0, 0),

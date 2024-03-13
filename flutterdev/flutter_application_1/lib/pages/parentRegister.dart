@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import '../Services/parentServices.dart';
-import 'success.dart';
 import '../main.dart';
 
 class ParentRegistrationPage extends StatelessWidget {
@@ -149,8 +148,7 @@ class ParentRegistrationPage extends StatelessWidget {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 253, 224, 116), // Background color of the button
-                    onPrimary: Color(0xFF17233D), // Text color
+                    foregroundColor: Color(0xFF17233D), backgroundColor: Color.fromARGB(255, 253, 224, 116), // Text color
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                   ),
                   child: Text(

@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
-import 'package:flutter_application_1/models/Notificationsmodel.dart';
 import 'package:flutter_application_1/pages/AddChildpage.dart';
 import 'package:flutter_application_1/pages/ChildListpage.dart';
 import 'package:flutter_application_1/pages/bottomBarWidget.dart';
 import 'package:flutter_application_1/pages/notificationpage.dart';
+import 'package:flutter_application_1/pages/reelsPage.dart';
 import 'package:flutter_application_1/pages/silverappBarwidget.dart';
 import 'package:provider/provider.dart';
 import './barparent.dart';
@@ -24,7 +24,7 @@ class _MainskeletonState extends State<Mainskeleton> {
     MyHomePage(title: 'Home'),
     WalletPage(),
     ChildListWidget(),
-    ReelsPage(),
+    reelsPage(),
     MarketPage(),
     AddChildWidget(),
   ];
@@ -48,17 +48,18 @@ class _MainskeletonState extends State<Mainskeleton> {
               Consumer<NotificationProvider>(
                   builder: (context, notificationprovider, _) {
                 if ((notificationprovider.isLoading == null) &&
-                    (notificationprovider.isLoading != true) && notificationprovider.notifs.isEmpty ) {
+                    (notificationprovider.isLoading != true) &&
+                    notificationprovider.notifs.isEmpty) {
                   // Fetch children if they are not already loading and the list is empty
-                   notificationprovider.fetchnotifications();
+                  notificationprovider.fetchnotifications();
                 }
 
                 // Display loading indicator while loading
                 if ((notificationprovider.isLoading != null) &&
                     (notificationprovider.isLoading == true)) {
                   return Center(
-            child: CircularProgressIndicator(),
-          );
+                    child: CircularProgressIndicator(),
+                  );
                 } else {
                   return SafeArea(
                     top: false,
@@ -78,7 +79,7 @@ class _MainskeletonState extends State<Mainskeleton> {
                       ],
                     ),
                   );
-               }
+                }
               }),
               Align(
                 alignment: AlignmentDirectional(0, 1),

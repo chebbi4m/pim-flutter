@@ -12,10 +12,7 @@ import 'package:flutter_application_1/pages/mainskeleton.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
-import './silverappBarwidget.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/pages/AddChildpage.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChildListWidget extends StatefulWidget {
   const ChildListWidget({super.key});
@@ -263,7 +260,7 @@ class _ChildListWidgetState extends State<ChildListWidget>
                       ),*/
                     Align(
                       alignment: AlignmentDirectional(0, -0.3),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: 400,
                         child: CarouselSlider(
@@ -584,7 +581,7 @@ class _ChildListWidgetState extends State<ChildListWidget>
                                                     child: TextButton(
                                                       onPressed: () {
                                                         print(
-                                                            "iddd" + child.id!);
+                                                            "iddd${child.id!}");
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(

@@ -31,21 +31,21 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Product'),
+        title: const Text('Edit Product'),
       ),
       body: SafeArea(
         child: Form(
-          key: _formKey,
+          key: formKey,
           child: ListView(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             children: [
               TextFormField(
                 controller: _productNameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Product Name',
                   filled: true,
                   fillColor: Colors.white,
@@ -57,11 +57,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: _descriptionController,
                 maxLines: 5,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Description',
                   filled: true,
                   fillColor: Colors.white,
@@ -73,10 +73,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: _priceController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Price',
                   filled: true,
                   fillColor: Colors.white,
@@ -88,10 +88,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: _typeController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Type',
                   filled: true,
                   fillColor: Colors.white,
@@ -103,10 +103,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
+                  if (formKey.currentState!.validate()) {
                     try {
                       Product updatedProduct = Product(
                         id: widget.product.id,
@@ -124,11 +124,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     }
                   }
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 56, 169, 194), // Button color
-                  onPrimary: Colors.white,
-                  padding: EdgeInsets.symmetric(
+                  foregroundColor: Colors.white, backgroundColor: const Color.fromARGB(255, 56, 169, 194),
+                  padding: const EdgeInsets.symmetric(
                     vertical: 15.0,
                     horizontal: 30.0,
                   ),

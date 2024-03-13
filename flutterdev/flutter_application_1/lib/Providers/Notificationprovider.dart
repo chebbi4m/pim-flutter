@@ -1,6 +1,5 @@
 // child_provider.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/ChildModel.dart';
 import 'package:flutter_application_1/models/Notificationsmodel.dart';
 
 import 'package:flutter_application_1/services/notificationservices.dart'; // Import your ChildService
@@ -28,7 +27,7 @@ NotificationProvider(){
     notifyListeners();
   }*/
   bool _isMenuOpen = true;
-  bool? isLoading = null;
+  bool? isLoading;
   bool get isMenuOpen => _isMenuOpen;
   List<notification> _notifs = [];
   // ignore: recursive_getters

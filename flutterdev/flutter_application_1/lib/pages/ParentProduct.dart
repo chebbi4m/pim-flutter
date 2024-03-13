@@ -10,7 +10,7 @@ class ParentProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Parent Page'),
+        title: const Text('Parent Page'),
       ),
       body: ChildCard(
               childName: childid, childID: 2.toString())
@@ -39,19 +39,19 @@ class ChildCard extends StatelessWidget {
       },
       child: Card(
         elevation: 4,
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundImage: AssetImage('assets/child_avatar.jpg'),
                 radius: 30,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 childName,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -112,8 +112,8 @@ class _ChildWishlistPageState extends State<ChildWishlistPage> {
             background: Container(
               color: Colors.red,
               alignment: Alignment.centerRight,
-              padding: EdgeInsets.only(right: 16.0),
-              child: Icon(Icons.delete, color: Colors.white),
+              padding: const EdgeInsets.only(right: 16.0),
+              child: const Icon(Icons.delete, color: Colors.white),
             ),
             child: ProductCard(
               product: wishlistProducts[index],
@@ -152,7 +152,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -167,40 +167,40 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         product.productName,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Price: \$${product.price}',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: const TextStyle(fontSize: 16, color: Colors.black),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Type: ${product.type}',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: const TextStyle(fontSize: 16, color: Colors.black),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         product.description,
-                        style: TextStyle(fontSize: 14, color: Colors.black),
+                        style: const TextStyle(fontSize: 14, color: Colors.black),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Column(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
                         _removeProductFromWishlist(context);
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.shopping_cart, color: Colors.blue),
+                      icon: const Icon(Icons.shopping_cart, color: Colors.blue),
                       onPressed: () {
                         WishListService.updateWishedProduct("2", product.id);
                       },
@@ -209,7 +209,7 @@ class ProductCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Image.asset(
               product.image ?? '',
               width: double.infinity,

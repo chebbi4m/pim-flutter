@@ -5,10 +5,10 @@ class RegistrationSuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Registration Successful"),
+        title: const Text("Registration Successful"),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           "Congratulations! Your registration was successful.",
           style: TextStyle(fontSize: 24.0),

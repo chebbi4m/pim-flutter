@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/bottomBarWidget.dart';
-import 'package:flutter_application_1/pages/silverappBarwidget.dart';
 import '../services/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'addProductForm.dart';
@@ -54,8 +52,7 @@ class _MarketPageState extends State<MarketPage> {
                     icon: Icon(Icons.shopping_basket),
                     label: Text('My Products'),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
-                      onPrimary: Colors.white,
+                      foregroundColor: Colors.white, backgroundColor: Colors.blue,
                       padding: EdgeInsets.symmetric(
                         vertical: 15.0,
                         horizontal: 30.0,
@@ -68,8 +65,7 @@ class _MarketPageState extends State<MarketPage> {
                     icon: Icon(Icons.shopping_cart),
                     label: Text('Buy a Product'),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                      onPrimary: Colors.white,
+                      foregroundColor: Colors.white, backgroundColor: Colors.green,
                       padding: EdgeInsets.symmetric(
                         vertical: 15.0,
                         horizontal: 30.0,

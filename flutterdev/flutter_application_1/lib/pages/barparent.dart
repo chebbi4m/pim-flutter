@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/controller/paymentProvider.dart';
 import 'package:flutter_application_1/controller/updateProfileProvider.dart';
-import 'package:flutter_application_1/models/response/payment_res.dart';
 import 'package:flutter_application_1/pages/header_widget.dart';
 import 'package:flutter_application_1/pages/web_view_widget.dart';
 import 'package:flutter_application_1/theme/theme_helper.dart';
@@ -41,18 +39,18 @@ class WalletPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Wallet"),
+        title: const Text("My Wallet"),
       ),
       body: Center(
         child: ElevatedButton(
-          child: Text("Recharge"),
+          child: const Text("Recharge"),
           onPressed: () {
             showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
                 return Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(20)),
                     color: Colors.white,
@@ -60,21 +58,21 @@ class WalletPage extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
+                      const Text(
                         "Enter Recharge Amount",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextField(
                         controller: _amountController,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Amount",
                           border: OutlineInputBorder(),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () async {
                           int amount =
@@ -100,7 +98,7 @@ class WalletPage extends StatelessWidget {
                             // Handle payment failure
                           }
                         },
-                        child: Text("Confirm"),
+                        child: const Text("Confirm"),
                       ),
                     ],
                   ),
@@ -245,7 +243,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                     foregroundImage: image != null
                                         ? FileImage(image!)
                                             as ImageProvider<Object>
-                                        : AssetImage(
+                                        : const AssetImage(
                                             "assets/images/avatar_kids.png"),
                                   ),
                                 ),
@@ -400,15 +398,15 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: Text('Success'),
+                                      title: const Text('Success'),
                                       content:
-                                          Text('Profile updated successfully!'),
+                                          const Text('Profile updated successfully!'),
                                       actions: [
                                         TextButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text('OK'),
+                                          child: const Text('OK'),
                                         ),
                                       ],
                                     );

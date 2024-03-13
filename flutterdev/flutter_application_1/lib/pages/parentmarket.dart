@@ -15,7 +15,7 @@ class _MyParentMarketState extends State<MyParentMarket> {
     MarketPage(),
     ReelsPage(),
     WalletPage(),
-    UpdateProfile(),
+    const UpdateProfile(),
   ];
 
   @override
@@ -24,31 +24,31 @@ class _MyParentMarketState extends State<MyParentMarket> {
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor:
-            Color.fromARGB(255, 255, 227, 125), // Set the background color
+            const Color.fromARGB(255, 255, 227, 125), // Set the background color
         type: BottomNavigationBarType.fixed, // Set the type to fixed
         currentIndex: _selectedIndex, // Set the current index
         selectedItemColor: Colors.black, // Set the color of the selected item
-        unselectedItemColor: Color.fromARGB(
+        unselectedItemColor: const Color.fromARGB(
             255, 56, 169, 194), // Set the color of the unselected items
         onTap: _onItemTapped, // Handle item tap
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.store),
             label: 'Market',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.video_collection),
             label: 'Reels',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.account_balance_wallet),
             label: 'Wallet',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: CircleAvatar(
               radius: 15,
               backgroundImage: AssetImage('assets/images/avatar_kids.png'),

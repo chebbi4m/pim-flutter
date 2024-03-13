@@ -13,7 +13,7 @@ class ChildProvider extends ChangeNotifier {
   HashMap<String, dynamic> soldes = HashMap();
   List<Child> get children => _children;
 
-  bool? isLoading = null;
+  bool? isLoading;
   Future<void> createChild(Child child) async {
     try {
       await _childService.createChild(child);

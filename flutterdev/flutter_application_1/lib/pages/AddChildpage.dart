@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
 import 'package:flutter_application_1/models/ChildModel.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
@@ -12,8 +10,6 @@ import 'package:flutter_application_1/pages/ChildListpage.dart';
 import 'package:flutter_application_1/pages/bottomBarWidget.dart';
 import 'package:flutter_application_1/pages/header_widget.dart';
 import 'package:flutter_application_1/pages/mainskeleton.dart';
-import 'package:flutter_application_1/pages/silverappBarwidget.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class AddChildWidget extends StatefulWidget {
@@ -921,10 +917,10 @@ double width = MediaQuery.of(context).size.width;
                                         } else if ((_passwordController.text !=
                                                 _confirmpasswordController
                                                     .text) &&
-                                            (!_passwordController
-                                                .text.isEmpty) &&
-                                            (!_confirmpasswordController
-                                                .text.isEmpty)) {
+                                            (_passwordController
+                                                .text.isNotEmpty) &&
+                                            (_confirmpasswordController
+                                                .text.isNotEmpty)) {
                                           showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
