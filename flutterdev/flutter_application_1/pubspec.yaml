@@ -30,6 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  permission_handler:
+  firebase_messaging : 
+  flutter_local_notifications: ^5.0.0+4
+  cloud_firestore:
   flutter_animate: ^4.5.0
   font_awesome_flutter: ^10.7.0
   http: ^1.2.0

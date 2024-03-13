@@ -14,34 +14,99 @@ import '../services/user.dart';
 import '../models/user.dart';
 import 'pages/parenttoolbar.dart';
 import 'pages/ChildListpage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
 import 'package:flutter_application_1/pages/parentRegister.dart';
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-  runApp(  
-     MultiProvider(
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  // Request notification permission
+  await _requestNotificationPermission();
+
+  runApp(
+    MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ChildProvider()),
-       ChangeNotifierProvider(create: (context) => NotificationProvider()),
+        ChangeNotifierProvider(create: (context) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavigationIndexProvider()),
-              ChangeNotifierProvider(create: (context) => PaymentNotifier()),
-      ChangeNotifierProvider(create: (context) => UpdateProfileNotifier()),
+        ChangeNotifierProvider(create: (context) => PaymentNotifier()),
+        ChangeNotifierProvider(create: (context) => UpdateProfileNotifier()),
       ],
-      child:  LoginApp(),
-    ),);
-
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+Future<void> _requestNotificationPermission() async {
+  final PermissionStatus status = await Permission.notification.request();
+  if (status != PermissionStatus.granted) {
+    print("Permission for notifications refused");
+  }
+}
+
+class MyApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Your App Title',
-      home: LoginApp()// Replace with your desired URL
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  @override
+  void initState() {
+    super.initState();
+    _initFirebaseMessaging();
+  }
+
+  void _initFirebaseMessaging() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      _displayNotification(
+          message.notification?.title, message.notification?.body);
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+    });
+  }
+
+  Future<void> _displayNotification(String? title, String? body) async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      '223JMT4611',
+      'mooteznotif',
+      'described notif channel',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    var platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await _flutterLocalNotificationsPlugin.show(
+      0,
+      title ?? '', // Use empty string if title is null
+      body ?? '', // Use empty string if body is null
+      platformChannelSpecifics,
+      payload: 'item x',
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: LoginApp(),
+    );
+  }
 }
 
 class LoginApp extends StatelessWidget {
@@ -61,6 +126,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    checkLoggedInUser(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(''), // Empty title
@@ -107,7 +173,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                       Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ParentRegistrationPage()),
@@ -150,6 +216,19 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> checkLoggedInUser(BuildContext context) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+    if (isLoggedIn) {
+      // If user is logged in, navigate to main page directly
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Mainskeleton()),
+      );
+    }
   }
 }
 
@@ -334,6 +413,7 @@ class _LoginFormState extends State<LoginForm> {
     await prefs.setString('userId', user.id);
     await prefs.setString('username', user.username);
     await prefs.setString('email', user.email);
+    await prefs.setBool('isLoggedIn', true); // Set isLoggedIn to true
   }
 }
 
