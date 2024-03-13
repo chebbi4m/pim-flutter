@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
-import 'package:flutter_application_1/models/Notificationsmodel.dart'; // import your NotificationProvider class
+// import your NotificationProvider class
 
 class NotificationWidget extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
       builder: (context, notificationProvider, _) {
         // Display loading indicator while loading
         if (notificationProvider.isLoading != null && notificationProvider.isLoading == true) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else {
@@ -31,12 +31,12 @@ class _NotificationWidgetState extends State<NotificationWidget> {
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Container(
-                color: Color(0xFFFFE27D),
+                color: const Color(0xFFFFE27D),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         'Notifications',
                         style: TextStyle(
@@ -56,17 +56,17 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                               children: [
-                          Icon(        
+                          const Icon(        
                                                   Icons
                                                       .person_add_alt_1_outlined,
                                                   color: Color(
                                                                 0xFF17233D),
                                                   size: 30,
                                                 ),     
-                                                Padding(padding: EdgeInsets.only(top: 15, left: 12),   
+                                                Padding(padding: const EdgeInsets.only(top: 15, left: 12),   
                        child : Text(   
                           notificationProvider.notifs[index].content,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF17233D),

@@ -8,7 +8,7 @@ class ChildProvider extends ChangeNotifier {
   List<Child> _children = [];
   List<Child> get children => _children;
 
-  bool? isLoading = null;
+  bool? isLoading;
   Future<void> createChild(Child child) async {
     try {
       await _childService.createChild(child);

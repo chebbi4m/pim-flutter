@@ -1,9 +1,7 @@
 import 'package:flutter_application_1/models/request/updateProfile_req.dart';
 import 'package:flutter_application_1/models/response/updateProfile_res.dart';
-import 'package:flutter_application_1/pages/barparent.dart';
 import 'package:flutter_application_1/services/config.dart';
 import 'package:http/http.dart' as https;
-import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 

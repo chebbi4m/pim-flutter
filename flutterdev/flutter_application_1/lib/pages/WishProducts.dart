@@ -27,10 +27,10 @@ class ProductListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product List'),
+        title: const Text('Product List'),
         actions: [
           IconButton(
-            icon: Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite),
             onPressed: () async{
              await Navigator.pushNamed(context, '/wishlist');
               // Refresh the ProductListPage
@@ -43,13 +43,13 @@ class ProductListPage extends StatelessWidget {
         future: WishListService.getProducts(), // Fetch products asynchronously
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             final List<Product> products = snapshot.data ?? [];
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 8.0,
                 crossAxisSpacing: 8.0,
@@ -66,7 +66,7 @@ class ProductListPage extends StatelessWidget {
                   builder: (context, wishSnapshot) {
                     if (wishSnapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (wishSnapshot.hasError) {
                       return Center(
                           child: Text('Error: ${wishSnapshot.error}'));
@@ -140,7 +140,7 @@ class _ProductCardState extends State<ProductCard> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/product.png'),
                     fit: BoxFit.cover,
@@ -155,12 +155,12 @@ class _ProductCardState extends State<ProductCard> {
                 children: [
                   Text(
                     widget.product.productName,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     'Price: \$${widget.product.price}',
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                   ),
                 ],
               ),
@@ -225,7 +225,7 @@ class _WishlistPageState extends State<WishlistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wishlist'),
+        title: const Text('Wishlist'),
       ),
       body: ListView.builder(
         itemCount: WishlistPage.selectedProducts.length,
@@ -242,10 +242,10 @@ class _WishlistPageState extends State<WishlistPage> {
               child: ListTile(
                 title: Text(
                   product.productName,
-                  style: TextStyle(fontSize: 18.0),
+                  style: const TextStyle(fontSize: 18.0),
                 ),
                 trailing: IconButton(
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                   onPressed: () {
                     setState(() {
                       WishlistPage.selectedProducts.removeAt(index);

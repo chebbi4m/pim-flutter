@@ -45,7 +45,7 @@ class ChildApi {
         String? value = await storage.read(
             key: "crypt:${child2.username}", aOptions: _getAndroidOptions());
         print(
-            'Child created successfully his private key crypted is :${value}');
+            'Child created successfully his private key crypted is :$value');
       } else {
         print('Failed to create child: ${response.body}');
       }

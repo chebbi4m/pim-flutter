@@ -26,21 +26,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Product'), // Title for the form
+        title: const Text('Add Product'), // Title for the form
       ),
       body: SafeArea(
         child: Form(
-          key: _formKey,
+          key: formKey,
           child: ListView(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             children: [
               TextFormField(
                 controller: productNameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Product Name',
                   filled: true,
                   fillColor: Colors.white,
@@ -52,11 +52,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: descriptionController,
                 maxLines: 5,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Description',
                   filled: true,
                   fillColor: Colors.white,
@@ -68,10 +68,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: priceController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Price',
                   filled: true,
                   fillColor: Colors.white,
@@ -83,10 +83,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: typeController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Type',
                   filled: true,
                   fillColor: Colors.white,
@@ -98,10 +98,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
+                  if (formKey.currentState!.validate()) {
                     try {
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
@@ -133,8 +133,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Success'),
-                            content: Text('Product added successfully.'),
+                            title: const Text('Success'),
+                            content: const Text('Product added successfully.'),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
@@ -143,7 +143,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   // Dismiss form
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -155,11 +155,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     }
                   }
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 56, 169, 194), // Button color
-                  onPrimary: Colors.white,
-                  padding: EdgeInsets.symmetric(
+                  foregroundColor: Colors.white, backgroundColor: const Color.fromARGB(255, 56, 169, 194),
+                  padding: const EdgeInsets.symmetric(
                     vertical: 15.0,
                     horizontal: 30.0,
                   ),

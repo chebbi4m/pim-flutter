@@ -56,6 +56,9 @@ dependencies:
   flutter_vector_icons: ^2.0.0
   google_fonts: ^4.0.3
   reels_viewer: ^1.0.0+3
+  photo_manager: ^3.0.0
+  file_picker: ^6.2.0
+  flutter_bloc: ^8.1.4
 
 dev_dependencies:
   flutter_test:

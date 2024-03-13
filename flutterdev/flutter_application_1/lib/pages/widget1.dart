@@ -13,12 +13,12 @@ class Widget1 extends StatelessWidget {
      body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, _) => [
-           sliverAppBarWidget()
+           const sliverAppBarWidget()
           ],
        // Use your custom AppBarWidget
       body: Stack(
         children: [
-         ChildListWidget(),
+         const ChildListWidget(),
           MenuSlide(),
         ],
       ),
@@ -32,7 +32,7 @@ class ContentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.blue,
-      child: Center(
+      child: const Center(
         child: Text('Content of Widget 1'),
       ),
     );
@@ -48,7 +48,7 @@ class MenuSlide extends StatelessWidget {
     return Consumer<NotificationProvider>(
       builder: (context, menuState, child) {
         return AnimatedPositioned(
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           left: menuState.isMenuOpen ? 0 : screenWidth - menuWidth,
           child: SizedBox(
@@ -58,8 +58,8 @@ class MenuSlide extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Menu',
                       style: TextStyle(
@@ -69,15 +69,15 @@ class MenuSlide extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                    title: Text('Menu Item 1'),
+                    title: const Text('Menu Item 1'),
                     onTap: () {},
                   ),
                   ListTile(
-                    title: Text('Menu Item 2'),
+                    title: const Text('Menu Item 2'),
                     onTap: () {},
                   ),
                   ListTile(
-                    title: Text('Menu Item 3'),
+                    title: const Text('Menu Item 3'),
                     onTap: () {},
                   ),
                 ],

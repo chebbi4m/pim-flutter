@@ -3,45 +3,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Providers/Notificationprovider.dart';
 import 'package:flutter_application_1/controller/paymentProvider.dart';
+import 'package:flutter_application_1/controller/reelProvider.dart';
 import 'package:flutter_application_1/controller/updateProfileProvider.dart';
-import 'package:flutter_application_1/pages/WishProducts.dart';
 import 'package:flutter_application_1/pages/mainskeleton.dart';
-import 'package:flutter_application_1/pages/widget1.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import '../services/user.dart';
 import '../models/user.dart';
-import 'pages/parenttoolbar.dart';
-import 'pages/ChildListpage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/Providers/Childsprovider.dart';
 import 'package:flutter_application_1/pages/parentRegister.dart';
-void main() {
 
-  runApp(  
-     MultiProvider(
+void main() {
+  runApp(
+    MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ChildProvider()),
-       ChangeNotifierProvider(create: (context) => NotificationProvider()),
+        ChangeNotifierProvider(create: (context) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavigationIndexProvider()),
-              ChangeNotifierProvider(create: (context) => PaymentNotifier()),
-      ChangeNotifierProvider(create: (context) => UpdateProfileNotifier()),
+        ChangeNotifierProvider(create: (context) => PaymentNotifier()),
+        ChangeNotifierProvider(create: (context) => UpdateProfileNotifier()),
+        ChangeNotifierProvider(create: (context) => ReelsNotifier()),
       ],
-      child:  LoginApp(),
-    ),);
-
+      child: LoginApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your App Title',
-      home: LoginApp()// Replace with your desired URL
-    );
+        title: 'Your App Title',
+        home: LoginApp() // Replace with your desired URL
+        );
   }
-
 }
 
 class LoginApp extends StatelessWidget {
@@ -107,7 +103,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                       Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ParentRegistrationPage()),
@@ -171,11 +167,11 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey =
+    final GlobalKey<FormState> formKey =
         GlobalKey<FormState>(); // Define a GlobalKey<FormState> for the form
 
     return Form(
-      key: _formKey, // Assign the _formKey to the Form widget
+      key: formKey, // Assign the _formKey to the Form widget
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -219,7 +215,7 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(height: 20.0),
           ElevatedButton(
             onPressed: () async {
-              if (_formKey.currentState!.validate()) {
+              if (formKey.currentState!.validate()) {
                 // Check if the form is valid
                 String username = widget.usernameController.text;
                 String password = widget.passwordController.text;
@@ -304,7 +300,7 @@ class _LoginFormState extends State<LoginForm> {
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 253, 224, 116), // Background color
+              backgroundColor: Color.fromARGB(255, 253, 224, 116), // Background color
               fixedSize: Size(72.0, 36.0), // Adjust width and height
               shape: RoundedRectangleBorder(
                 borderRadius:
